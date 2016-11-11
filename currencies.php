@@ -26,10 +26,15 @@ function currency_conversion_shortcode( $atts ) {
 	$output = $atts['output'];
 	$value = $atts['value'];
 
-	$ratesFeed = file_get_contents ("http://api.fixer.io/latest?base=".$base."&symbols=".$output."");
-	$exchangeRates = json_decode($ratesFeed, true);
+	// No conversion required if Stored and Display currencies are the same
+	if ($base!=$output) {
+		$ratesFeed = file_get_contents ("http://api.fixer.io/latest?base=".$base."&symbols=".$output."");
+		$exchangeRates = json_decode($ratesFeed, true);
 	
-	$rate = $exchangeRates['rates'][$atts['output']]; // Exchange Rate for display currency
+		$rate = $exchangeRates['rates'][$atts['output']]; // Exchange Rate for display currency
+	} else {
+		$rate = 1;
+	}
 
 	$conversion = number_format($value*$rate, 2, '.', ','); // Converted value
 
