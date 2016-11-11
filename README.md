@@ -1,4 +1,4 @@
-# CurrencyConversion_Shortcode
+# Currency Conversion Shortcode
 This is a WordPress shortcode which will convert base currency to either EUR,GBP or USD.
 
 This shortcode uses the fixer.io exchange rate feed.
